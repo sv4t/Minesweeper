@@ -9,15 +9,41 @@ public class Field {
 
     public Field(int width, int height, int numberOfBombs) {
         if(width <= 0 && height <= 0 && numberOfBombs <= 0){
-            throw new IllegalArgumentException("The width, height or amount of bombs must be greater than zero!");
+            throw new IllegalArgumentException("The width, height and amount of bombs must be greater than zero!");
         }
-        if(numberOfBombs >= width*height){
+        if(numberOfBombs >= height*width){
             throw new IllegalArgumentException("The number of bombs cannot be greater or equal to the amount of tiles!");
         }
         this.width = width;
         this.height = height;
         this.numberOfBombs = numberOfBombs;
         field = new int [height][width];
+        this.generateField(numberOfBombs);
+    }
+    public Field(){
+        this.width = 10;
+        this.height = 10;
+        field = new int [10][10];
+    }
+
+    public int getHeight(){
+        return this.height;
+    }
+
+    public int getWidth(){
+        return this.width;
+    }
+
+    public int[][] getField(){
+        return this.field;
+    }
+
+    public int getNumberOfBombs(){
+        return this.numberOfBombs;
+    }
+
+    public void generateField(int numberOfBombs){
+        this.numberOfBombs = numberOfBombs;
         Random rand = new Random();
 
         for(int i = 0; i < numberOfBombs; i++){
@@ -41,27 +67,6 @@ public class Field {
                 }
             }
         }
-    }
-    public Field(){
-        this.width = 10;
-        this.height = 10;
-        field = new int [10][10];
-    }
-
-    public int getHeight(){
-        return this.height;
-    }
-
-    public int getWidth(){
-        return this.width;
-    }
-
-    public int[][] getField(){
-        return this.field;
-    }
-
-    public int getNumberOfBombs(){
-        return this.numberOfBombs;
     }
     public void printField(){
         for(int i = 0; i < getHeight(); i++){
